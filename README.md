@@ -3,7 +3,7 @@ Reuseable Function
 
 ## Price function
 
-```
+```javascript
 function reverseDisplayPrice(price) {
     var arr = price.split(' ');
     var temp = arr[0];
