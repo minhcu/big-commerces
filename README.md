@@ -5,7 +5,16 @@ URL: [https://minhdong.mybigcommerce.com/](https://minhdong.mybigcommerce.com/)
 
 Preview code: **6l3rpgazfo**
 
-## Price function
+## Price function (due to Price didn't display right)
+
+Price format should be **priceUnit + price**
+
+Ex:
+- $42.00
+- đ42.00
+
+Used in: Everytheme.
+
 
 ```javascript
 function reverseDisplayPrice(price) {
