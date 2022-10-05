@@ -35,19 +35,21 @@ There are 2 setting in the product setting which decide the "Add to cart" button
 
 ### Inventory
 - No tracking -> I = -2147483648
-- 0 in stock -> I = 0
-- > 1 in stock -> I = 1
+- 0 in stock -> I = 0 (API return product.available = 0)
+- > 1 in stock -> I = 1 (API return product.available = -2147483648)
 
 -> isAvailable = !!I
 
 ### Purchasability
-- This product can be purchased in my online store (Add to cart Enabled) -> P = true
-- This product is coming soon but I want to take pre-orders -> P = pre
+- This product can be purchased in my online store (Add to cart Enabled) -> P = false
+- This product is coming soon but I want to take pre-orders -> P = true
 - This product cannot be purchased in my online store -> P = false
+
+There are no continueSelling setup, therefore we should use isPreorder.
 
 ### How it should work
 
-- isSoldOut = !P || 
+- isSoldOut = !P && !isAvailable
 
 Ex:
 - Can be purchased + Inventory = 0 = > https://minhdong.mybigcommerce.com/orbit-terrarium-small/
@@ -68,16 +70,16 @@ const product = {
 ```
 
 How flags work:
-- Can be purchased + No-Inventory tracking => flags = 1
-- Can be purchased + Inventory = 0 => flags = 0
-- Can be purchased + Inventory > 0 => flags = 1
+- Can be purchased P.false + No-Inventory tracking I.true => flags = 1
+- Can be purchased P.false + Inventory = 0 I.false => flags = 0
+- Can be purchased P.false + Inventory > 0 I.true => flags = 1
 
 
 - Can NOT be purchased => available = 0; flags = 0;
 
-- Pre-order + No-Inventory tracking => flags = 1
-- Pre-order + Inventory = 0 => flags = 0
-- Pre-order + Inventory > 0 => flags = 0
+- Pre-order P.true + No-Inventory tracking I.true => flags = 1
+- Pre-order P.true + Inventory = 0 I.false => flags = 0
+- Pre-order P.true + Inventory > 0 I.true => flags = 0
 
 Remodify search-results_items.js
 ```javascript
