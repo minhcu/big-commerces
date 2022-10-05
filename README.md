@@ -33,39 +33,14 @@ Ex:
 - Coming soon (Pre-order) + Inventory > 0 => https://minhdong.mybigcommerce.com/laundry-detergent/
 - Cannot be purchased + Inventory > 0 => https://minhdong.mybigcommerce.com/fog-linen-chambray-towel-beige-stripe/
 
-```javascript
-function customIsContinueSelling() {
-    var productAvailable, continueSelling, isAvailable;
-    if (selectedVariant) {
-        productAvailable = selectedVariant.available;
-        continueSelling = selectedVariant.flags === 1;
-        // available === -2147483648 when the variant or product is marked as No tracking inventory.
-        isAvailable = productAvailable > 0 || productAvailable === -2147483648;
-    }
-    else {
-        var vlen = variants.length;
-        for(var i = 0; i < variants.length; i++) {
-            var v = variants[i];
-            // no inventory tracking?
-            if (v.available === -2147483648){
-                // we set total available as unknown and isAvailable = true
-                productAvailable = -2147483648;
-                continueSelling = selectedVariant.flags === 1; //Replace continueSelling = false;
-                isAvailable = true;
-                break;
-            }                  
-            // add available
-            productAvailable += v.available;
-            // isAvailable is only set when v.available > 0
-            if (v.available > 0)
-                isAvailable = true;
+Bigcommerce will return these from setting
 
-            // continue selling when sold out?
-            if ((v.flags & 1)) {
-                continueSelling = true;
-            }
-        }
-    }
+```javascript
+
+const product = {
+    has_options: ,
+    pre_order: ,
+    
 }
 
 ```
