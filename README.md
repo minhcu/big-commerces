@@ -35,6 +35,7 @@ Ex:
 
 Bigcommerce will return these for product setting
 
+
 ```javascript
 
 const product = {
@@ -44,38 +45,50 @@ const product = {
 
 ```
 
+How flags work:
+- Can be purchased + No-Inventory tracking
+- Can be purchased + Inventory = 0
+- Can be purchased + Inventory > 0
+
 Remodify search-results_items.js
 ```javascript
 if (selectedVariant) {
-        productAvailable = selectedVariant.available;
-        continueSelling = selectedVariant.flags & 1;
-        // available === -2147483648 when the variant or product is marked as No tracking inventory.
-        isAvailable = productAvailable > 0 || productAvailable === -2147483648;
-    }
-    else {            
-        // aggregrate the available field from all variants.
-        productAvailable = 0;
-        for(var i = 0; i < variants.length; i++){
-            var v = variants[i];
-            // no inventory tracking?
-            if (v.available === -2147483648){
-                // we set total available as unknown and isAvailable = true
-                productAvailable = -2147483648;
-                continueSelling = false;
+    productAvailable = selectedVariant.available;
+    continueSelling = selectedVariant.flags === 1;
+    // available === -2147483648 when the variant or product is marked as No tracking inventory.
+    isAvailable = productAvailable > 0 || productAvailable === -2147483648;
+}
+else {            
+    // aggregrate the available field from all variants.
+    productAvailable = 0;
+    for(var i = 0; i < variants.length; i++){
+        var v = variants[i];
+        // no inventory tracking?
+        if (v.available === -2147483648){
+            // we set total available as unknown and isAvailable = true
+            productAvailable = -2147483648;
+            continueSelling = false;
+            isAvailable = true;
+            break;
+        } else {                        
+            // add available
+            productAvailable += v.available;
+            // isAvailable is only set when v.available > 0
+            if (v.available > 0)
                 isAvailable = true;
-                break;
-            } else {                        
-                // add available
-                productAvailable += v.available;
-                // isAvailable is only set when v.available > 0
-                if (v.available > 0)
-                    isAvailable = true;
 
-                // continue selling when sold out?
-                if ((v.flags & 1)) {
-                    continueSelling = true;
-                }
+            // continue selling when sold out?
+            if ((v.flags & 1)) {
+                continueSelling = true;
             }
         }
     }
+}
+
+
+t.available = productAvailable;
+t.hasDiscount = hasDiscount;
+t.continueSelling = continueSelling;
+t.isSoldOut = !continueSelling && !isAvailable;
+
 ```
