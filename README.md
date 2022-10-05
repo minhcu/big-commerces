@@ -102,6 +102,9 @@ t.isSoldOut = !continueSelling && !isAvailable;
 
 ## Custom Swatches
 
+Used in theme:
+- Annie's Garden
+
 ```javascript
 var UsfSwatches = {
         props: {
@@ -144,6 +147,9 @@ var UsfSwatches = {
 ```
 
 ## Custom product description (due to product api return null)
+
+Used in theme:
+- Annie's Garden
 
 ```javascript
     var UsfCardDesc = {
