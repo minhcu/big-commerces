@@ -31,7 +31,7 @@ Ex:
 - Can be purchased + Inventory = 0 = > https://minhdong.mybigcommerce.com/orbit-terrarium-small/
 - Can be purchased + No-Inventory tracking => https://minhdong.mybigcommerce.com/orbit-terrarium-large/
 - Coming soon (Pre-order) + Inventory > 0 => https://minhdong.mybigcommerce.com/laundry-detergent/
-- Cannot be purchased => https://minhdong.mybigcommerce.com/fog-linen-chambray-towel-beige-stripe/
+- Cannot be purchased + Inventory > 0 => https://minhdong.mybigcommerce.com/fog-linen-chambray-towel-beige-stripe/
 
 ```javascript
 function customIsContinueSelling() {
@@ -50,7 +50,7 @@ function customIsContinueSelling() {
             if (v.available === -2147483648){
                 // we set total available as unknown and isAvailable = true
                 productAvailable = -2147483648;
-                continueSelling = selectedVariant.flags === 1;
+                continueSelling = selectedVariant.flags === 1; //Replace continueSelling = false;
                 isAvailable = true;
                 break;
             }                  
