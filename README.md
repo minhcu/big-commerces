@@ -74,7 +74,7 @@ else {
         if (v.available === -2147483648){
             // we set total available as unknown and isAvailable = true
             productAvailable = -2147483648;
-            continueSelling = selectedVariant.flags & 1;
+            continueSelling = selectedVariant.flags & 1; //Replace 
             isAvailable = true;
             break;
         } else {                        
