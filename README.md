@@ -46,7 +46,7 @@ const product = {
 ```
 
 How flags work:
-- Can be purchased + No-Inventory tracking => flags = 0
+- Can be purchased + No-Inventory tracking => flags = 1
 - Can be purchased + Inventory = 0 => flags = 0
 - Can be purchased + Inventory > 0 => flags = 1
 
