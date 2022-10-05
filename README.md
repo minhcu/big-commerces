@@ -33,14 +33,13 @@ Ex:
 - Coming soon (Pre-order) + Inventory > 0 => https://minhdong.mybigcommerce.com/laundry-detergent/
 - Cannot be purchased + Inventory > 0 => https://minhdong.mybigcommerce.com/fog-linen-chambray-towel-beige-stripe/
 
-Bigcommerce will return these from setting
+Bigcommerce will return these for product setting
 
 ```javascript
 
 const product = {
-    has_options: ,
-    pre_order: ,
-    
+    has_options: options.length > 0 ?,
+    pre_order:  isAbleToPurchased,
 }
 
 ```
