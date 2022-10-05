@@ -181,6 +181,9 @@ Used in theme:
                     },
                 });
             }
+            else {
+                this.productDescript = this.product.description;
+            }
         },
         template: `
             <div class="card-desc" v-html="productDescript"></div>
