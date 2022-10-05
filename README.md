@@ -46,15 +46,22 @@ const product = {
 ```
 
 How flags work:
-- Can be purchased + No-Inventory tracking
-- Can be purchased + Inventory = 0
-- Can be purchased + Inventory > 0
+- Can be purchased + No-Inventory tracking => flags = 0
+- Can be purchased + Inventory = 0 => flags = 0
+- Can be purchased + Inventory > 0 => flags = 1
+
+
+- Can NOT be purchased => available = 0; flags = 0;
+
+- Pre-order + No-Inventory tracking => flags = 1
+- Pre-order + Inventory = 0 => flags = 0
+- Pre-order + Inventory > 0 => flags = 0
 
 Remodify search-results_items.js
 ```javascript
 if (selectedVariant) {
     productAvailable = selectedVariant.available;
-    continueSelling = selectedVariant.flags === 1;
+    continueSelling = selectedVariant.flags & 1;
     // available === -2147483648 when the variant or product is marked as No tracking inventory.
     isAvailable = productAvailable > 0 || productAvailable === -2147483648;
 }
@@ -67,7 +74,7 @@ else {
         if (v.available === -2147483648){
             // we set total available as unknown and isAvailable = true
             productAvailable = -2147483648;
-            continueSelling = false;
+            continueSelling = selectedVariant.flags & 1;
             isAvailable = true;
             break;
         } else {                        
