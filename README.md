@@ -28,58 +28,8 @@ function reverseDisplayPrice(price) {
 
 ## Continue Selling
 
-There are 2 setting in the product setting which decide the "Add to cart" button
+Pre-order ON > variant.flags = 1;
 
-- **Inventory**
-- **Purchasability**
-
-### Inventory
-- No tracking -> I = -2147483648
-- 0 in stock -> I = 0 (API return product.available = 0)
-- > 1 in stock -> I = 1 (API return product.available = -2147483648)
-
--> isAvailable = !!I
-
-### Purchasability
-- This product can be purchased in my online store (Add to cart Enabled) -> P = false
-- This product is coming soon but I want to take pre-orders -> P = true
-- This product cannot be purchased in my online store -> P = false
-
-There are no continueSelling setup, therefore we should use isPreorder.
-
-### How it should work
-
-- isSoldOut = !P && !isAvailable
-
-Ex:
-- Can be purchased + Inventory = 0 = > https://minhdong.mybigcommerce.com/orbit-terrarium-small/
-- Can be purchased + No-Inventory tracking => https://minhdong.mybigcommerce.com/orbit-terrarium-large/
-- Coming soon (Pre-order) + Inventory > 0 => https://minhdong.mybigcommerce.com/laundry-detergent/
-- Cannot be purchased + Inventory > 0 => https://minhdong.mybigcommerce.com/fog-linen-chambray-towel-beige-stripe/
-
-Bigcommerce will return these for product setting
-
-
-```javascript
-
-const product = {
-    has_options: options.length > 0 ?,
-    pre_order:  isAbleToPurchased,
-}
-
-```
-
-How flags work:
-- Can be purchased P.false + No-Inventory tracking I.true => flags = 1
-- Can be purchased P.false + Inventory = 0 I.false => flags = 0
-- Can be purchased P.false + Inventory > 0 I.true => flags = 1
-
-
-- Can NOT be purchased => available = 0; flags = 0;
-
-- Pre-order P.true + No-Inventory tracking I.true => flags = 1
-- Pre-order P.true + Inventory = 0 I.false => flags = 0
-- Pre-order P.true + Inventory > 0 I.true => flags = 0
 
 Remodify search-results_items.js
 ```javascript
