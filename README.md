@@ -28,13 +28,26 @@ function reverseDisplayPrice(price) {
 
 ## Continue Selling
 
-There are 3 options in the product setting which decide the "Add to cart" button
+There are 2 setting in the product setting which decide the "Add to cart" button
 
+- **Inventory**
+- **Purchasability**
+
+### Inventory
+- No tracking -> I = -2147483648
+- 0 in stock -> I = 0
+- > 1 in stock -> I = 1
+
+-> isAvailable = !!I
 
 ### Purchasability
-- This product can be purchased in my online store (Add to cart Enabled). if Inventory = 0 || No tracking => Sold out.
-- This product is coming soon but I want to take pre-orders (Pre-order Enabled | Doesn't care about inventory tracking).
-- This product cannot be purchased in my online store (View more detail/Soldout enabled | Doesn't care about inventory tracking)
+- This product can be purchased in my online store (Add to cart Enabled) -> P = true
+- This product is coming soon but I want to take pre-orders -> P = pre
+- This product cannot be purchased in my online store -> P = false
+
+### How it should work
+
+- isSoldOut = !P || 
 
 Ex:
 - Can be purchased + Inventory = 0 = > https://minhdong.mybigcommerce.com/orbit-terrarium-small/
