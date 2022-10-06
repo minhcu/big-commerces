@@ -133,6 +133,9 @@ Used in theme:
  ## Theme settings
  Normally, we can use `_usfThemeSettings`, but it isn't available in preview mode. Therefore we will declare a temporary variable in the theme init.
  
+ Used in theme:
+ - Bespoke
+ 
  ```javascript
  function _usfSetDefaultThemeSettings() {
     window._usfNoneSalePriceLabel = _usfThemeSettings['non-sale-price-label'] || 'Was:'
@@ -144,6 +147,7 @@ Used in theme:
  
  Used in theme:
  - Artisan
+ - Beautify
  
  ```javascript
  var UsfRating = {
