@@ -115,7 +115,7 @@ Used in theme:
                     success: r => {
                         r = JSON.parse(r);
                         console.log(r);
-                        return this.productDescript = r.data.description;
+                        return this.productDescript = r.data.description.replace(/\\n/g, "<br>");
                     },
                 });
             }
