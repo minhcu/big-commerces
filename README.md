@@ -133,4 +133,10 @@ Used in theme:
  ## Theme settings
  Normally, we can use `_usfThemeSettings`, but it isn't available in preview mode. Therefore we will declare a temporary variable in the theme init.
  
+ ```javascript
+ function _usfSetDefaultThemeSettings() {
+    window._usfNoneSalePriceLabel = _usfThemeSettings['non-sale-price-label'] || 'Was:'
+    window._usfSalePriceLabel = _usfThemeSettings['sale-price-label'] || 'Now:'
+ }
+ ```
  
