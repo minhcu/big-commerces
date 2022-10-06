@@ -129,3 +129,8 @@ Used in theme:
     }
     usf.register(UsfCardDesc, null, "usf-card-desc");
  ```
+ 
+ ## Theme settings
+ Normally, we can use `_usfThemeSettings`, but it isn't available in preview mode. Therefore we will declare a temporary variable in the theme init.
+ 
+ 
