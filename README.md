@@ -34,7 +34,7 @@ Pre-order ON > variant.flags = 1;
 Remodify search-results_items.js
 ```javascript
 
-const isPreorder === !!seletedVariantForPrice.flags
+const isPreorder = !!seletedVariantForPrice.flags
 
 ```
 
