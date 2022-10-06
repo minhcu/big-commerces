@@ -142,6 +142,9 @@ Used in theme:
  
  ## Rating
  
+ Used in theme:
+ - Artisan
+ 
  ```javascript
  var UsfRating = {
         props: {
