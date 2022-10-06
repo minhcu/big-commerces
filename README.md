@@ -140,3 +140,36 @@ Used in theme:
  }
  ```
  
+ ## Rating
+ 
+ ```javascript
+ var UsfRating = {
+        props: {
+            product: Object
+        },
+        data() {
+            var product = this.product;
+            var hasRating = product.reviewCount > 0;
+            var rating;
+
+            if (hasRating) rating = Math.floor(product.review / product.reviewCount);
+
+            return {
+                rating: rating,
+            };
+        },
+        template:`
+            <p v-if="!!rating" class="card-text" data-test-info-type="productRating">
+                <span class="rating--small">
+                    <span v-for="i in 5" :key="i" :class="'icon icon--rating' + (rating - i >= 0 ? 'Full' : 'Empty')">
+                        <svg>
+                            <use xlink:href="#icon-star"></use>
+                        </svg>
+                    </span>
+                </span>
+            </p>
+        `
+    }
+
+    usf.register(UsfRating, null, "usf-rating");
+ ```
