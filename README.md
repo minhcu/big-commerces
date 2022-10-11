@@ -152,7 +152,7 @@ Used in theme:
  ```javascript
  _usfThemeSettings['non-sale-price-label'] || _usfThemeSettings['pdp-non-sale-price-label']
  _usfThemeSettings['sale-price-label'] || _usfThemeSettings['pdp-sale-price-label']
- _usfThemeSettings['sale-badges']
+ _usfThemeSettings['sale-badges'] || _usfThemeSettings.product_sale_badges_visibility
  
  ```
  
