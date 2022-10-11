@@ -144,16 +144,16 @@ Used in theme:
  ```
  
  ## Theme settings
- Normally, we can use `_usfThemeSettings`, but it isn't available in preview mode. Therefore we will declare a temporary variable in the theme init.
+ Popular use
  
  Used in theme:
  - Bespoke
  
  ```javascript
- function _usfSetDefaultThemeSettings() {
-    window._usfNoneSalePriceLabel = _usfThemeSettings['non-sale-price-label'] || 'Was:'
-    window._usfSalePriceLabel = _usfThemeSettings['sale-price-label'] || 'Now:'
- }
+ _usfThemeSettings['non-sale-price-label'] || _usfThemeSettings['pdp-non-sale-price-label']
+ _usfThemeSettings['sale-price-label'] || _usfThemeSettings['pdp-sale-price-label']
+ _usfThemeSettings['sale-badges']
+ 
  ```
  
  ## Rating
