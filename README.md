@@ -133,6 +133,16 @@ Used in theme:
     usf.register(UsfCardDesc, null, "usf-card-desc");
  ```
  
+ ```css
+ p {
+    display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+ ```
+ 
  ## Theme settings
  Normally, we can use `_usfThemeSettings`, but it isn't available in preview mode. Therefore we will declare a temporary variable in the theme init.
  
