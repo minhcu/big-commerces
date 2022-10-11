@@ -118,7 +118,7 @@ Used in theme:
                     success: r => {
                         r = JSON.parse(r);
                         console.log(r);
-                        return this.productDescript = r.data.description.replace(/\\n/g, "<br>");
+                        return this.productDescript = r.data.description.replace(/\\n/g, "");
                     },
                 });
             }
@@ -127,10 +127,11 @@ Used in theme:
             }
         },
         template: `
-            <div class="card-desc" v-html="productDescript"></div>
+            <p v-html="_usfTruncateWords(productDescript,40,'...')"></p>
         `
     }
     usf.register(UsfCardDesc, null, "usf-card-desc");
+});
  ```
  
  ```css
