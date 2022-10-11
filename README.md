@@ -17,6 +17,9 @@ Used in: Everytheme.
 
 
 ```javascript
+// Put this in init function
+usf.settings.priceFormat = reverseDisplayPrice(usf.settings.priceFormat);
+
 function reverseDisplayPrice(price) {
     var arr = price.split(' ');
     var temp = arr[0];
