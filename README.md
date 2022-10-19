@@ -134,16 +134,6 @@ Used in theme:
 });
  ```
  
- ```css
- p {
-    display: -webkit-box;
-    max-width: 200px;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
- ```
- 
  ## Theme settings
  Popular use
  
