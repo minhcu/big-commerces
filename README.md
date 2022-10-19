@@ -172,3 +172,93 @@ var UsfSwatches = {
  ```
  
  ## Ajax add to cart
+ 
+ ```javascript
+ class OverlayUtils {
+  constructor() {
+    this.body = document.body;
+    this.overlay = document.querySelector('.loading-overlay');
+  }
+
+  show() {
+    if(!this.body.classList.contains('scroll-locked')) this.body.classList.add('scroll-locked');
+    if(!this.overlay.classList.contains('visible')) this.overlay.classList.add('visible');
+  }
+
+  hide() {
+    this.body.classList.remove('scroll-locked');
+    this.overlay.classList.remove('visible');
+  }
+}
+
+function handleBtn(button) {
+    if (!button.dataset.defaultText) {
+        button.setAttribute('data-default-text', button.querySelector('.button-text').innerText)
+        var progressText = button.dataset.progressText || '';
+
+        button.classList.add("progress");
+        button.setAttribute('disabled', 'disabled');
+        button.querySelector('.button-text').innerText = progressText;
+        return;
+    }
+    var defaultText = button.dataset.defaultText;
+
+    button.classList.remove("progress");
+    button.removeAttribute('data-default-text');
+    button.setAttribute('disabled', false);
+    button.querySelector('.button-text').innerText = defaultText;
+}
+
+window._usfAddCartAjax = function (e) {
+    e.preventDefault();
+    
+    // Do not do AJAX if browser doesn't support FormData. No IE9.
+
+    var overlay = new OverlayUtils;
+    overlay.show();
+
+    // Turn off quick add || or using ajax not supported browser
+    if (_usfThemeSettings['product-purchase-disable-ajax'] || window.FormData === undefined) {
+        window.location = addBtn.href
+    }
+
+    // Get <a> button (e.target return span)
+    var addBtn = e.target.parentNode;
+    var productTitle = addBtn.dataset.productTitle
+    var productId = addBtn.dataset.productId
+    var quantity = 1; // quick add 1 product only
+
+    handleBtn(addBtn);
+
+    // Invalid product
+    if (!productId) { 
+        handleBtn(addBtn);
+        return overlay.hide();
+    }
+
+    var utils = stencilUtils; //BIGCOMMERCE ultis
+
+    var form = new FormData;
+    form.append('action', 'add');
+    form.append('product_id', productId);
+    form.append('qty', quantity);
+
+    // BIGCOMMERCE ultis
+    utils.api.cart.itemAdd(form, (err, response) => {
+        let message;
+
+        if (err || response.data.error) {
+          message = err || response.data.error;
+        } else {
+          message = productTitle + 'added to cart!';
+        }
+
+        // document.body.dispatchEvent('quick-cart-refresh');
+
+        setTimeout(() => {
+            alert(message);
+            handleBtn(addBtn);
+        }, 500);
+    });
+}
+ ```
