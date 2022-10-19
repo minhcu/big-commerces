@@ -174,7 +174,7 @@ usf.register(UsfCardDesc, null, "usf-card-desc");
  
  Add this to addToCart/Pre-order button
  
- ```vue
+ ```javascript
  @click="_usfAddToCartAjax"
  ```
  
