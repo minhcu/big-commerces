@@ -87,45 +87,44 @@ var UsfSwatches = {
 ## Custom product description (due to product api return null)
 
 ```javascript
-    var UsfCardDesc = {
-        props: {
-            product: Object,
-        },
-        data() {
-            var product = this.product;
-            var productDescript;
-            return {
-                product: product,
-                productDescript: productDescript,
-            }
-        },
-        beforeMount() {
-            if (!this.product.description) {
-                var id = this.product.id;
-                usf.utils.send({
-                    url: usf.settings.searchSvcUrl + 'products',
-                    data: {
-                        apiKey: usf.settings.siteId,
-                        id: id,
-                        fields: 'description'
-                    },
-                    success: r => {
-                        r = JSON.parse(r);
-                        console.log(r);
-                        return this.productDescript = r.data.description.replace(/\\n/g, "");
-                    },
-                });
-            }
-            else {
-                this.productDescript = this.product.description;
-            }
-        },
-        template: `
-            <p v-html="_usfTruncateWords(productDescript,40,'...')"></p>
-        `
-    }
-    usf.register(UsfCardDesc, null, "usf-card-desc");
-});
+var UsfCardDesc = {
+    props: {
+        product: Object,
+    },
+    data() {
+        var product = this.product;
+        var productDescript;
+        return {
+            product: product,
+            productDescript: productDescript,
+        }
+    },
+    beforeMount() {
+        if (!this.product.description) {
+            var id = this.product.id;
+            usf.utils.send({
+                url: usf.settings.searchSvcUrl + 'products',
+                data: {
+                    apiKey: usf.settings.siteId,
+                    id: id,
+                    fields: 'description'
+                },
+                success: r => {
+                    r = JSON.parse(r);
+                    console.log(r);
+                    return this.productDescript = r.data.description.replace(/\\n/g, "");
+                },
+            });
+        }
+        else {
+            this.productDescript = this.product.description;
+        }
+    },
+    template: `
+        <p v-html="_usfTruncateWords(productDescript,40,'...')"></p>
+    `
+}
+usf.register(UsfCardDesc, null, "usf-card-desc");
  ```
  
  ## Theme settings
