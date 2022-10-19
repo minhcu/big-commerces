@@ -43,9 +43,6 @@ const isPreorder = !!selectedVariantForPrice.flags
 
 ## Custom Swatches
 
-Used in theme:
-- Annie's Garden
-
 ```javascript
 var UsfSwatches = {
         props: {
@@ -88,9 +85,6 @@ var UsfSwatches = {
 ```
 
 ## Custom product description (due to product api return null)
-
-Used in theme:
-- Annie's Garden
 
 ```javascript
     var UsfCardDesc = {
@@ -135,10 +129,6 @@ Used in theme:
  ```
  
  ## Theme settings
- Popular use
- 
- Used in theme:
- - Bespoke
  
  ```javascript
  _usfThemeSettings['non-sale-price-label'] || _usfThemeSettings['pdp-non-sale-price-label']
@@ -148,10 +138,6 @@ Used in theme:
  ```
  
  ## Rating
- 
- Used in theme:
- - Artisan
- - Beautify
  
  ```javascript
  var UsfRating = {
@@ -184,3 +170,5 @@ Used in theme:
 
     usf.register(UsfRating, null, "usf-rating");
  ```
+ 
+ ## Ajax add to cart
