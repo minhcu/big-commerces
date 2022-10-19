@@ -172,6 +172,13 @@ usf.register(UsfCardDesc, null, "usf-card-desc");
  
  ## Ajax add to cart
  
+ Add this to addToCart/Pre-order button
+ 
+ ```vue
+ @click="_usfAddToCartAjax"
+ ```
+ 
+ 
  ```javascript
  class OverlayUtils {
   constructor() {
