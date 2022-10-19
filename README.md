@@ -242,7 +242,7 @@ window._usfAddCartAjax = function (e) {
         return overlay.hide();
     }
 
-    var utils = stencilUtils; //BIGCOMMERCE ultis
+    var ultis = stencilUtils; //BIGCOMMERCE ultis
 
     var form = new FormData;
     form.append('action', 'add');
@@ -250,7 +250,7 @@ window._usfAddCartAjax = function (e) {
     form.append('qty', quantity);
 
     // BIGCOMMERCE ultis
-    utils.api.cart.itemAdd(form, (err, response) => {
+    ultis.api.cart.itemAdd(form, (err, response) => {
         let message;
 
         if (err || response.data.error) {
