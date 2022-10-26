@@ -276,7 +276,6 @@ window._usfAddCartAjax = function (e) {
     var UsfSlider = {
         props: {
             product: Object,
-            scaledSelectedImageUrl: String,
             selectedImage: Object,
         },
         data() {
