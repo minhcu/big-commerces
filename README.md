@@ -133,6 +133,7 @@ usf.register(UsfCardDesc, null, "usf-card-desc");
  _usfThemeSettings['non-sale-price-label'] || _usfThemeSettings['pdp-non-sale-price-label']
  _usfThemeSettings['sale-price-label'] || _usfThemeSettings['pdp-sale-price-label']
  _usfThemeSettings['sale-badges'] || _usfThemeSettings.product_sale_badges_visibility
+ _usfThemeSettings.product_sale_badges !== 'none'
  
  ```
  
