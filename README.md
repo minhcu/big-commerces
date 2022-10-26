@@ -269,3 +269,55 @@ window._usfAddCartAjax = function (e) {
     });
 }
  ```
+
+## Image slider
+
+```javascript
+    var UsfSlider = {
+        props: {
+            product: Object,
+            scaledSelectedImageUrl: String,
+            selectedImage: Object,
+        },
+        data() {
+            let product = this.product;
+            let images = this.product.images;
+            let active = 0;
+            return {
+                product: product,
+                images: images,
+                active: active,
+            };
+        },
+        computed: {
+            activeImageIndex() {
+                const index = this.active % this.images.length
+                return Math.abs(index);
+            }
+        },
+        template:`
+            <div class="card-img-container card-img-container--slider">
+                <img
+                v-for="(img, i) in this.images"
+                class="card-image"
+                :class="(_usfThemeSettings.lazyload_mode != 'disabled' ? 'lazyload' : '') + (i === activeImageIndex ? ' is-active' : '' )"
+                :data-src="img.url"
+                data-sizes="auto"
+                :alt="selectedImage.alt || product.title"
+                :title="product.title"
+                />
+                <template v-if="this.images.length > 1">
+                    <span v-if="activeImageIndex > 0" class="card-image-prev" @click.prevent="active--">
+                        <span class="is-srOnly">Previous</span>
+                        <i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-left"></use></svg></i>
+                    </span>
+                    <span v-if="activeImageIndex < this.images.length - 1" class="card-image-next" @click.prevent="active++">
+                        <span class="is-srOnly">Next</span>
+                        <i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-right"></use></svg></i>
+                    </span>
+                </template>
+            </div>
+        `
+    };
+    usf.register(UsfSlider, null, "usf-slider");
+```
