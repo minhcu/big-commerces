@@ -320,3 +320,45 @@ window._usfAddCartAjax = function (e) {
     };
     usf.register(UsfSlider, null, "usf-slider");
 ```
+
+## multiple price custom
+
+```javascript
+var _usfPriceCustom = `
+    <div v-if="loaded" class="usf-price-wrapper">
+        <template v-if="!!data.price.non_sale_price_with_tax">
+            <span class="usf-price usf-has-discount" v-html="data.price.non_sale_price_with_tax.formatted"></span>
+            <span class="usf-discount" v-html="data.price.sale_price_with_tax.formatted"></span>
+        </template>
+        <template v-else>
+            <span class="usf-price" v-html="data.price.with_tax.formatted"></span>
+        </template>
+    </div>
+`;
+
+var _usfPrice = {
+        template: _usfPriceCustom,
+        props: {
+            product: Object,
+        },
+        data() {
+            return {
+                loaded: false,
+                data: Object,
+            };
+        },
+        created() {
+            var self = this;
+            stencilUtils.api.productAttributes.optionChange(this.product.id, {}, {}, (err, response) => {
+                if (!err) {
+                    self.loaded = true;
+                    self.data = response.data;
+                    console.log(self.data)
+                    console.log(self.loaded);
+                    }
+                }
+            );
+        },
+    };
+    usf.register(_usfPrice, null, "usf-price-custom");
+```
