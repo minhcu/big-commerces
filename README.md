@@ -84,6 +84,84 @@ var UsfSwatches = {
     usf.register(UsfSwatches, null, "usf-swatches");
 ```
 
+## Custom swatch 2 - need API
+
+```javascript
+function getProductOptionsv2(id, name, url) {
+  var pv_url = "https://sportif.projectahost.com/api/productoptions/av/" + id;
+  $.ajax({
+    type: "GET",
+    url: pv_url,
+    // The key needs to match your method's input parameter (case-sensitive).
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (data) {
+      var options = "";
+      var attr_container = "";
+      var pa_product_name = name;
+      $.each(data, function (variant_idx, variant) {
+        if (variant.inventory > 0) {
+          if (variant.swatch_image != "") {
+            options +=
+              '<a class="card-swatch card-swatch-color" href="' + url + "?c=" + variant.color + '" data-imageurl = "' + variant.image_url + "\" onmouseover='swap_swatch_in(" + id + ',event)\'><span class="card-swatch-image" title="' + variant.color + '"><img src="' + variant.swatch_image + '" data-imageurl = "' + variant.image_url + '" ></span></a>';
+          } else {
+            options +=
+              '<a class="card-swatch card-swatch-color" href="' +
+              url +
+              "?c=" +
+              variant.color +
+              '" data-imageurl = "' +
+              variant.image_url +
+              "\" onmouseover='swap_swatch_in(" +
+              id +
+              ',event)\'><span class="card-swatch-image" title="' +
+              variant.color +
+              '" data-imageurl = "' +
+              variant.image_url +
+              '" >' +
+              variant.color +
+              "</span></a>";
+          }
+        } else {
+          /*
+                    if(variant.swatch_image != '')
+                    {
+    				    options += '<a class="card-swatch card-swatch-color unavailable"  data-imageurl = "' + variant.image_url + '" ><span class="card-swatch-image" title="' + variant.color + '"><img src="' + variant.swatch_image + '"></span></a>';                                             
+                    }
+                    else{
+                        options += '<a class="card-swatch card-swatch-color unavailable"  data-imageurl = "' + variant.image_url + '" ><span class="card-swatch-image" title="' + variant.color + '">' + variant.color + '</span></a>';                                             
+                    }
+                    */
+        }
+      });
+      $("#pa-options-container-" + id).html(options);
+
+      /*
+        $.each(data.option_values, function(idx, option){            
+             $("#pa-option-container-{{id}}").append('<button type="button" onclick="card_add_to_cart({{id}},' + option.id + ',' + option.option_id + ')">' + option.label + '</button>');
+           });
+           */
+    },
+    error: function (errMsg) {
+      //alert("error: " + errMsg);
+    },
+  });
+}
+
+function loadProductOption(id, name, url) {
+  getProductOptionsv2(id, name, url);
+}
+
+function swap_swatch_in(id, e) {
+  var img = e.target;
+  img_url = $(img).attr("data-imageurl");
+  if (img_url != "") {
+    $("#card_" + id + "_image").attr("srcset", "");
+    $("#card_" + id + "_image").attr("src", img_url);
+  }
+}
+```
+
 ## Custom product description (due to product api return null)
 
 ```javascript
