@@ -33,3 +33,29 @@
     return max
 }
 ```
+
+## Swatch showing wrong picture
+
+```javascript
+this.product.options.map((option,optionIndex) => {
+                    // check if it's the color option
+                    var isColor = s.colorNames == option.name;
+                    var renderedOptions = {};
+                    var vid = 0;
+
+                    if (!s.hideOptions.includes(option.name)) return h('ul', {
+                        class: {
+                            'usf-is-color': isColor,
+                            'usf-swatch-circle': isColor && s.swatchType == 'circle'
+                        },
+                        attrs: { 'data-option-index': optionIndex }
+                    }, [
+                        option.values.map((o, index) => {
+                            var vlength = this.product.variants.length;
+                            for (let x = 0; x < vlength; x++) {
+                                var v = this.product.variants[x];
+
+                                // Prevent using the same variant again
+                                if (vid === v.id) continue;
+                                vid = v.id;
+```
