@@ -60,6 +60,15 @@ this.product.options.map((option,optionIndex) => {
                                 vid = v.id;
 ```
 ## Customer redirect filter
+```html
+<template v-if="_usfHasContainer">
+        <template v-if="hasFilters">
+            <usf-new-filters class="usf-sr-filters"></usf-new-filters>
+        </template>
+        <usf-new-sr></usf-new-sr>
+    </template>
+```
+
 ```javascript
 // Begin custom redirect filter
     var NewSearchResult = {
