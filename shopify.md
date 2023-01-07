@@ -60,6 +60,13 @@ this.product.options.map((option,optionIndex) => {
                                 vid = v.id;
 ```
 ## Customer redirect filter
+
+```liquid
+{%  if template == "index" %}
+<div id="usf_container"></div>
+{% endif %}
+```
+
 ```html
 <template v-if="_usfHasContainer">
         <template v-if="hasFilters">
