@@ -440,3 +440,39 @@ var _usfPrice = {
     };
     usf.register(_usfPrice, null, "usf-price-custom");
 ```
+
+## judgeme review plugin
+
+```javascript
+var _usfJudgeMe = {
+        props: {
+            product: Object,
+        },
+        data() {
+            return {
+                loaded: false,
+                data: Object,
+            };
+        },
+        mounted() {
+            var el = this.$el;
+            // jdgm.SHOP_DOMAIN
+            var URL = 'https://judge.me/api/v1/widgets/preview_badge'
+            // jdgm.PUBLIC_TOKEN
+            var TOKEN = '?api_token=nvAObxMqlzwB1_QJvr2-HFYG0X0'
+            // jdgm.SHOP_DOMAIN
+            var store = '&shop_domain=store-kuqmqgarn1.mybigcommerce.com'
+            // Product URL only
+            var handle = '&handle=' + this.product.urlName.split('/')[2]
+            var fetchURL = URL + TOKEN + store + handle
+            
+            fetch(fetchURL)
+            .then(rs => rs.json())
+            .then(rs => this.data = rs)
+        },
+        template: `
+            <div class="jdgm-widget jdgm-preview-badge jdgm-preview-badge--with-link jdgm--done-setup" style="text-align:center;" v-html="this.data.badge"><div>
+        `
+    };
+    usf.register(_usfJudgeMe, null, "usf-judgeme");
+```
