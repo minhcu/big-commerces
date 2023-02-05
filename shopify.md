@@ -192,3 +192,14 @@ this.product.options.map((option,optionIndex) => {
     usf.register(NewFilterOption, null, 'usf-new-filter-option');
     // End custom redirect filter
 ```
+## Is new product
+```javascript
+var usfIsNew = function (day) {
+    var dayNow = new Date(Date.now());
+    var productDate = new Date(day);
+    var distance = dayNow - productDate;
+    var diffDays = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    return diffDays < 10
+}
+```
