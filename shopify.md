@@ -203,3 +203,15 @@ var usfIsNew = function (day) {
     return diffDays < 10
 }
 ```
+
+## Show translated filter on filter breadcrumb
+```javascript
+ function _translateSelectedFilter(label, id) {
+     var facet = usf.search.result.facets.find(f => f.id === id);
+     var llabel = facet.labels.find(l => l.label === label);
+     return llabel.llabel;
+ }
+```
+```html
+<b v-html="root.formatBreadcrumbLabel(facet, f[0], _translateSelectedFilter(queryValStr, facetId))"></b>
+```
