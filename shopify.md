@@ -209,7 +209,7 @@ var usfIsNew = function (day) {
  function _translateSelectedFilter(label, id) {
      var facet = usf.search.result.facets.find(f => f.id === id);
      var llabel = facet.labels.find(l => l.label === label);
-     return llabel.llabel;
+     return llabel.llabel ? llabel.llabel : llabel.label;
  }
 ```
 ```html
