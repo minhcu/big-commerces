@@ -215,3 +215,14 @@ var usfIsNew = function (day) {
 ```html
 <b v-html="root.formatBreadcrumbLabel(facet, f[0], _translateSelectedFilter(queryValStr, facetId))"></b>
 ```
+
+## add to cart instant search
+```css
+.usf-pull-left form.usf-add-to-cart .usf-add-to-cart-btn {
+    position: unset!important;
+    opacity: 1!important;
+    visibility: visible!important;
+    transform: translateY(0)!important;
+    margin: 0!important;
+}
+```
