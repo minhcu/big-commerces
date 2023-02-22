@@ -476,3 +476,27 @@ var _usfJudgeMe = {
     };
     usf.register(_usfJudgeMe, null, "usf-judgeme");
 ```
+
+## Yotpo plugin
+```javascript
+var _usfYotpo = {
+        props: {
+            product: Object,
+        },
+        template: `
+            <div class="yotpo bottomLine" :data-product-id="this.product.id"><div>
+        `
+    }; 
+    usf.register(_usfYotpo, null, "usf-yotpo");
+usf.event.add(['sr_updated', 'sr_viewChanged', 'rerender'], function () {
+    if (window.yotpo){
+        try
+        {
+            yotpo.initWidgets()
+        }
+        catch (e){
+            console.error('[USF] Failed to initialize Yotpo plugin. ' + e);
+        }
+    }
+});
+```
