@@ -500,3 +500,23 @@ usf.event.add(['sr_updated', 'sr_viewChanged', 'rerender'], function () {
     }
 });
 ```
+
+## Opinew
+```javacsript
+var p = args.product;
+        var metaFieldValue = usf.utils.getMetafield(p, 'opinew_metafields', 'stars_lists');
+        var noReview = `<div class="opinew-stars-plugin-link opinew-list-stars-disable" @click="window.location.href = productUrl" style="text-decoration: none;">
+            <span class="opinew-star-plugin-inside">
+                <i class="stars-color opw-noci opw-noci-star-empty" aria-hidden="true"></i>
+                <i class="stars-color opw-noci opw-noci-star-empty" aria-hidden="true"></i>
+                <i class="stars-color opw-noci opw-noci-star-empty" aria-hidden="true"></i>
+                <i class="stars-color opw-noci opw-noci-star-empty" aria-hidden="true"></i>
+                <i class="stars-color opw-noci opw-noci-star-empty" aria-hidden="true"></i>
+            </span>
+            <span class="opinew-no-reviews-stars-plugin" onMouseOver="this.style.color='#c45500'" onMouseOut="this.style.color='inherit'"><b></b></span>
+        </div>`
+        return h('div', {
+            class: 'opinew-stars-plugin-product-list',
+            domProps: { innerHTML: metaFieldValue ? metaFieldValue : noReview}
+        });
+```
