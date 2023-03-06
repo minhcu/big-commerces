@@ -401,3 +401,24 @@ function _customSort() {
     return sortByOptions;
 }
 ```
+
+## wishlist plus plugin
+```html
+<button :class="'swym-button btn swym-add-to-wishlist-view-product product_'+product.id" data-swaction="addToWishlist" :data-product-url="window.location.origin + '//'+productUrl" data-with-epi="true" :data-product-id="product.id" :data-variant-id="selectedVariantForPrice.id"></button>
+```
+```javascript
+usf.event.add('init', function () {
+    usf.event.add(['sr_updated','sr_viewChanged','rerender'], function () {
+        setTimeout(() => {
+            window._swat && window._swat.initializeActionButtons('#usf_container', '[data-swaction="addToWishlist"]');
+        }, 300);
+    })
+    if(!window.SwymCallbacks){
+        window.SwymCallbacks = [];
+    }
+    window.SwymCallbacks.push(swymCallbackFn);
+});
+function swymCallbackFn(){
+    window._swat && window._swat.initializeActionButtons('#usf_container', '[data-swaction="addToWishlist"]');
+}
+```
