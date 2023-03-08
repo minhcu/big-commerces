@@ -520,3 +520,11 @@ var p = args.product;
             domProps: { innerHTML: metaFieldValue ? metaFieldValue : noReview}
         });
 ```
+
+
+## different term
+```javascript
+(usf.platform.isCollectionPage || usf.search.term === usf.search.result.query)
+
+
+```
