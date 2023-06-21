@@ -546,7 +546,7 @@ var UsfRating = {
 ```
 
 ## judgeme
-```javacsript
+```javascript
  usf.plugins.push({
         render_searchResultsProductReview2(t, h, args, next) {
             var p = args.product; 
