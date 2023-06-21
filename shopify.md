@@ -476,3 +476,71 @@ var UsfRating = {
         `
     }
 ```
+
+## CUSTOM ADD TO CART ATC
+
+```html
+  <div class="usf-sr-item__atc">            
+            <form method="POST" enctype="multipart/form-data" :action="usf.platform.addToCartUrl" class="usf-add-to-cart">
+                <input type="hidden" name="form_type" value="product">
+                <input type="hidden" name="utf8" value="✓">
+                <input type="hidden" name="quantity" value="1"> 
+                <input type="hidden" name="id" :value="selectedVariantForPrice.id">
+                <button type="submit" :data-product-id="product.id" class="usf-add-to-cart-btn" @click.prevent.stop="_usfAddToCart">
+                    <span class="usf-label">Add to cart</span> 
+                </button> 
+            </form>
+        </div> 
+```
+
+```css
+  .usf-sr-item__atc form.usf-add-to-cart .usf-add-to-cart-btn {
+    width: 100%;
+    height: unset;
+    transform: unset;
+    position: relative;
+    color: #fff ;
+    background: #5B5953;
+    padding: 15px 30px;
+    font-size: 18px;
+    line-height: 20px;
+    text-transform: uppercase;
+    font-family: neue_medium,sans-serif;
+    border-radius: 5px;
+    visibility: visible;
+    opacity: 1; 
+    margin: 0;
+}
+.usf-sr-item__atc form.usf-add-to-cart .usf-add-to-cart-btn .usf-label {
+    transform: unset;
+    opacity: 1;
+    font-family: neue_medium,sans-serif;
+    font-size: 18px;
+    line-height: 20px; 
+    padding: 0; 
+} 
+.usf-sr-item__atc form.usf-add-to-cart .usf-add-to-cart-btn:hover .usf-label {
+    transform: unset;
+}
+.usf-mobile .usf-sr-item__atc .usf-add-to-cart-btn .usf-label {
+    font-size: 14px!important; 
+}
+.usf-mobile .usf-sr-item__atc form.usf-add-to-cart .usf-add-to-cart-btn:not(.usf-has-error), 
+.usf-mobile .usf-sr-item__atc form.usf-add-to-cart .usf-add-to-cart-btn:not(.usf-has-error):hover {
+    width: 100%;
+    height: unset;
+    transform: unset; 
+    position: relative;
+    border-radius: 5px;
+}
+
+.usf-mobile .usf-sr-item__atc form.usf-add-to-cart .usf-add-to-cart-btn .usf-label {
+    transform: unset;
+}
+.usf-mobile .usf-sr-item__atc form.usf-add-to-cart .usf-add-to-cart-btn:not(.usf-quick-showing):not(.usf-has-error) .usf-label {
+    opacity: 1; 
+}
+.usf-mobile .usf-sr-item__atc form.usf-add-to-cart .usf-add-to-cart-btn[disabled="disabled"]:not(.usf-quick-showing):not(.usf-has-error) .usf-label {
+    opacity: 0;
+}
+```
