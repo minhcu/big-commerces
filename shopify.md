@@ -544,3 +544,25 @@ var UsfRating = {
     opacity: 0;
 }
 ```
+
+## judgeme
+```javacsript
+ usf.plugins.push({
+        render_searchResultsProductReview2(t, h, args, next) {
+            var p = args.product; 
+            var rating = usf.utils.getMetafield(p, 'reviews', 'rating_count')
+            var html = usf.utils.getMetafield(p, 'judgeme', 'badge').replace(/\|/g, '"')
+            if (rating) html = html.replace(/([1-9])\w* review(s*)/g, '(' + rating + ')')
+            console.log(html) 
+
+            return h('div', {
+                class: 'jdgm-widget jdgm-preview-badge', attrs: { 'data-id': p.id }, 
+                domProps: { innerHTML: html }
+            }); 
+        }
+    });
+
+    // re-render the search results so the reviews are shown.
+    usf.event.raise('rerender');
+
+```
