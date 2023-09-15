@@ -9,3 +9,16 @@
 <!-- swatch image in mobile -->
 <div v-if="swatchImage && usf.isMobileFilter || facet.title == 'Color'" class="usf-mobile-swatch" :style="swatchStyle"></div>
 ```
+
+```css
+.usf-facet-values--List .usf-facet-value[data-title="Color"] {
+    display: flex;
+    align-items: center; 
+}
+.usf-facet-values--circle [data-title="Color"] .usf-mobile-swatch {
+    border-radius: 9999px;
+}
+.usf-facet-values--List .usf-facet-value.usf-selected[data-title="Color"] .usf-mobile-swatch {
+    border: 2px solid #000;
+}
+```
