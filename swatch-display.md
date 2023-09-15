@@ -6,8 +6,21 @@
 </div>
 
 
-<!-- swatch image in mobile -->
-<div v-if="swatchImage && usf.isMobileFilter || facet.title == 'Color'" class="usf-mobile-swatch" :style="swatchStyle"></div>
+<button v-else :data-title="facet.title" :class="(isSelected ? 'usf-selected ' : '') + (swatchImage ? (facet.title == 'Color' ? '' : ' usf-facet-value--with-background') : '') + ' usf-btn usf-relative usf-facet-value usf-facet-value-' + (facet.multiple ? 'multiple' : 'single')" :title="isSwatch || isBox ? label + ' (' + option.value + ')' : undefined" :style="usf.isMobileFilter ? null : (facet.title == 'Color' ? null : swatchStyle)" @click.prevent.stop="onToggle">
+    <!-- checkbox -->
+    <div v-if="!isBox && !isSwatch && facet.multiple" :class="'usf-checkbox' + (isSelected ? ' usf-checked' : '')">
+        <span class="usf-checkbox-inner"></span>
+    </div> 
+
+    <!-- swatch image in mobile -->
+    <div v-if="swatchImage && usf.isMobileFilter || facet.title == 'Color'" class="usf-mobile-swatch" :style="swatchStyle"></div>
+
+    <!-- option label -->
+    <span class="usf-label usf-btn" v-html="label"></span>
+    
+    <!-- product count -->
+    <span v-if="!(!usf.settings.filterNavigation.showProductCount || (swatchImage && !usf.isMobileFilter)) && option.value !== undefined" class="usf-value">{{option.value}}</span>
+</button>
 ```
 
 ```css
