@@ -4,4 +4,8 @@
     <!-- Filter options -->                
     <usf-filter-option v-for="o in visibleOptions" :facet="facet" :option="o" :key="o.label"></usf-filter-option>
 </div>
+
+
+<!-- swatch image in mobile -->
+<div v-if="swatchImage && usf.isMobileFilter || facet.title == 'Color'" class="usf-mobile-swatch" :style="swatchStyle"></div>
 ```
