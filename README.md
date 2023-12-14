@@ -1,3 +1,35 @@
+# Common
+
+```javascript
+var NewFilterOption = {
+    mixins: [usf.components.FilterOption],
+    template: usf.templates.filterOption,
+    data() {
+        var opt = this.option;
+        var children = opt.children;
+        children = children && children.length ? children : null;
+        var newCollapsed = 1;
+
+        if (this.facet.navigationCollections && this.facet.title === 'Collection (NEW)') {
+            newCollapsed = children && children.find(c => c.id == _usfCollectionId)
+            console.log('1', !children || !children.find(c => c.id == _usfCollectionId) || (opt.collection && usf.platform.collection !== opt.collection.urlName))
+            console.log('3', !!children && !!children.find(c => c.id == _usfCollectionId))
+        }
+
+        return {
+            newCollapsed: !newCollapsed,
+        }
+    },
+    methods: {
+        _usfCustomToggle(e) {
+            this.newCollapsed = !this.newCollapsed;
+            usf.utils.stopEvent(e);
+        }, 
+    }
+}
+usf.register(NewFilterOption, null, 'new-filter-option');
+```
+
 # big-commerces support
 Reuseable Function
 
