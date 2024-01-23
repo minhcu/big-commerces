@@ -566,3 +566,97 @@ var UsfRating = {
     usf.event.raise('rerender');
 
 ```
+
+#_usfAddToCart1
+```javacsript
+function _usfAddToCart1(e, callback) {
+    // if _usfDisableAjaxAddToCart is present, use form add to cart instead
+    if (window._usfDisableAjaxAddToCart)
+        return;
+    // prevent bubble
+    event.preventDefault();
+
+    var cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+
+    // get the `add to cart` btn
+    var formElement = event.target.closest('form');
+    var addToCartBtn = formElement.querySelector('.usf-add-to-cart-btn');
+    var formData = new FormData(formElement);
+    // construct form object
+    var objectData = {};
+    formData.forEach(function(value, key) {
+        objectData[key] = value;
+    });
+
+
+    // make the add to cart btn disabled
+    addToCartBtn.setAttribute('disabled', 'disabled');
+    var clsList = addToCartBtn.classList;
+    clsList.remove('usf-is-added');
+    clsList.add('usf-with-loader');
+
+    const config = fetchConfig('javascript');
+    config.headers['X-Requested-With'] = 'XMLHttpRequest';
+    delete config.headers['Content-Type'];
+
+    if (cart) {
+        formData.append('sections', cart.getSectionsToRender().map((section) => section.id));
+        formData.append('sections_url', window.location.pathname);
+        cart.setActiveElement(document.activeElement);
+    }
+    config.body = formData;
+
+    // send request
+    fetch(usf.platform.baseUrl + '/cart/add.js', config).then(function(response) {
+        addToCartBtn.removeAttribute('disabled');
+        clsList.remove('usf-with-loader');
+
+        if (callback)
+            callback(response);
+
+        if (response.ok) {
+            clsList.add('usf-is-added');
+
+            // close the preview modal if any
+            var x = document.querySelector('.usf-preview__wrapper .usf-remove');
+                if (x) x.click();
+
+            response.json().then(rs=>{
+                // if (typeof _usfOnAddToCartSuccess === "function") _usfOnAddToCartSuccess(rs, formElement);
+                
+                cart.classList.remove('is-empty')
+                cart.renderContents(rs);
+            })
+
+            
+        } else {
+            response.json().then(function(content) {
+                clsList.remove('usf-is-added');
+
+                var errorMsg = content['description'];
+
+                // show error
+                var lbl = addToCartBtn.querySelector('.usf-label');
+                // if the label has `usf-disable-error` css class, the error message is not written to the label.
+                var shouldUpdateLbl = !lbl.classList.contains('usf-disable-error');
+
+                if (shouldUpdateLbl) {
+                    if (!lbl._oldText)
+                        lbl._oldText = lbl.innerHTML;
+                    lbl.innerHTML = errorMsg
+                }
+
+                clsList.add('usf-has-error');
+                setTimeout(function() {
+                    if (lbl._oldText)
+                        lbl.innerHTML = lbl._oldText
+
+                    clsList.remove('usf-has-error');
+                }, 2500);
+
+                typeof _usfOnAddToCartError === "function" ? _usfOnAddToCartError(content, formElement) : null;
+            });
+        }
+    });
+}
+```
