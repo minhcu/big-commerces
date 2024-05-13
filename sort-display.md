@@ -1,4 +1,4 @@
-[image](./sort-display.png)
+![image](./sort-display.png)
 
 ```javascript
 
