@@ -110,7 +110,7 @@ usf.register(UsfDropDown, null, 'new-dropdown');
 
 ```
 
-```stylesheet
+```css
 
 .usf-mobile .usf-popover .usf-body {
     position: absolute;
